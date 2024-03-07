@@ -1,0 +1,244 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>LTM-NeRF</title>
+<link href="./js/style.css" rel="stylesheet">
+<script type="text/javascript" src="./js/jquery.mlens-1.0.min.js"></script>
+<script type="text/javascript" src="./js/jquery.js"></script>
+
+
+<style>
+  p.serif{
+    font-family:"Times New Roman", Times, serif;
+  }
+  p.sansserif{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .text-center {
+    text-align: center;
+}
+</style>
+  
+</head>
+
+<body>
+<div class="content">
+  <h1><strong>LTM-NeRF: 3D Local Tone Mapping Embedded HDR Neural Radiance Field</strong></h1>
+  <p id="authors" class="serif">
+    <br>
+    <a>Anonymous authors</sup></a>
+    <br>
+    <br>
+    <a>Under review at T-PAMI</sup></a>
+  </p>
+
+  <div class="row">
+    <div class="col-full">
+      <img class="summary-img" src="figs/teaser.png" style="width:100%;">
+    </div>
+  </div>
+
+  <p style="font-size: 1.2em" class="serif"> 
+    Our LTM-NeRF, which incorporates the Camera Response Function (CRF) module and the Neural Exposure Field, 
+    collaborates seamlessly with NeRF. Using only (a) LDR views with different exposure settings as the supervision, 
+    LTM-NeRF can reconstruct an HDR neural radiance field for HDR view rendering. 
+    Furthermore, LTM-NeRF also supports directly producing (b) locally tone-mapped views, 
+    or (c) the LDR views (globally tone-mapped using CRF) under a variety of exposure settings.</p>
+
+</div>
+
+<div class="content">
+  <p style="text-align:center; font-size: 2em;" class="serif">Abstract</p>
+  <p>
+    Recent advances in Neural Radiance Fields (NeRF) have provided a new geometric primitive for novel view synthesis. 
+    Constrained by camera sensors and input views, novel views rendered by current methods exhibit a lower dynamic range 
+    compared to the range perceivable by human eyes. To address this, we present High Dynamic Range (HDR) NeRF with a 
+    spatially varying neural exposure field (aka LTM-NeRF), a method designed to recover an HDR radiance field and achieve 
+    3D local tone mapping. Our LTM-NeRF contains a Camera Response Function (CRF) module and a neural exposure field, 
+    working in cooperation with a NeRF-based framework. Our approach allows for the synthesis of HDR views, tone-mapped views, 
+    and LDR views under different exposure settings, using only the multi-exposure LDR inputs as the supervision. 
+    Specifically, we propose a differentiable CRF module for HDR radiance field reconstruction, 
+    globally mapping the scene's HDR radiance to an LDR pixel value captured by the camera sensor. 
+    Moreover, we introduce a spatially varying exposure field to approximate the HDR scene appearance in a NeRF with limited dynamic range locally, 
+    for compatibility with various displays.  To evaluate our method, we collect a new forward-facing HDR dataset. 
+    Experimental results on synthetic and real-world scenes validate that our method can not only synthesize HDR views 
+    and exposure-varying LDR views accurately but also render locally tone-mapped views naturally.
+  </p>
+</div>
+
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Methodology</p>
+  <p style="font-size: 1.2em" class="serif">
+    Overview of LTM-NeRF. The optimization of LTM-NeRF is composed of two stages. 
+    In stage one, an HDR NeRF is recovered by integrating a NeRF-based framework with the CRF Network. 
+    The first stage is optimized under the supervision of multi-view multi-exposure images. 
+    After the optimization, the learned HDR NeRF and CRF are frozen. 
+    In stage two, a Neural Exposure Field (NeEF) is introduced to represent the exposure time of the HDR NeRF and achieve 3D tone mapping. 
+    To optimize NeEF, we conduct pseudo-ground truth as the supervision. 
+    After the whole training, the system can render locally tone-mapped views, HDR views, and LDR views with different exposures.
+  </p>
+  <img class="summary-img" src="figs/pipeline.png" style="width:100%;"> <br>
+
+
+
+
+</div>
+
+<!-- results -->
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Results -- LDR Views (varying exposure) </p>
+  <p style="font-size: 1.2em" class="serif">
+    After reconstructing the HDR NeRF from multi-exposure multi-view images, LTM-NeRF can efficiently render controllable LDR views with varying exposures due to the incorporating of the Camera Response Function during the rendering process.<br>
+  </p>
+
+  <div class="row">
+    <div class="col-full">
+      <video  width="100%" loop controls>
+        <source src="results/main_results/ldr_rendering.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Results -- HDR Views </p>
+  <p style="font-size: 1.2em" class="serif">
+    LTM-NeRF can render HDR novel views from the HDR NeRF. The HDR views are tone mapped with a 2D Tone Mapping Operation (TMO) for display. In comparison to LDR views, the HDR views contain the scene content of both over-exposure and under-exposure areas. <br>
+  </p>
+
+  <div class="row">
+    <div class="col-full">
+      <video  width="100%" loop controls>
+        <source src="results/main_results/hdr_rendering.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  </div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Results -- Locally Tone-mapped Views (3D tone mapping)</p>
+  <p style="font-size: 1.2em" class="serif">
+    LTM-NeRF can also directly render local tone-mapped views. Thanks to the introduction of the spatially varying neural exposure field, 
+    LTM-NeRF preserves the consistency of rendered views. The Exposure Maps display the learned exposure time of each 3D point within the 
+    HDR radiance field. The brighter the map, the longer the exposure time. The darker regions correspond with a longer exposure time to achieve an appropriate contrast.<br>
+  </p>
+
+  <div class="row">
+    <div class="col-full">
+      <video  width="100%" loop controls>
+        <source src="results/main_results/tm_video.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  </div>
+
+
+<!-- comparisons -->
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Comparisons on LDR/HDR Views</p>
+  <p style="font-size: 1.2em" class="serif">
+    LTM-NeRF outperforms both NeRF and NeRF-W on novel LDR Views rendering. When compared with NeRF-GT (the upper bound of our method) 
+    for novel LDR and HDR view rendering, our method achieves similar performance. 
+  </p>
+  <div class="row">
+    <div class="col-full">
+      <video  width="100%" loop controls>
+        <source src="results/comparisons/ldr_hdr_comparison.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  </div>
+
+
+  <div class="content">
+    <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Comparisons on Locally Tone-mapped Views</p>
+    <p style="font-size: 1.2em" class="serif">
+      Compared with the 2D image and video tone mapping method, LTM-NeRF produces tone-mapped views with more vivid color and improved contrast. 
+      Most importantly, our 3D tone mapping method inherently preserves the view consistency.
+    </p>
+    <div class="row">
+      <div class="col-full">
+        <video  width="100%" loop controls>
+          <source src="results/comparisons/tm_comparison.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  
+    </div>
+
+
+  <!-- 3D representation -->
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Different 3D Representations</p>
+  <p style="font-size: 1.2em" class="serif">
+    LTM-NeRF is also compatible with other 3D scene representations, such as Instant-NGP. 
+    We showcase the results using Instant-NGP to represent both the radiance and exposure fields. 
+    The exposure maps, rendered using the model integrated with Instant-NGP, exhibit superior quality, 
+    attributable to the accurate geometry learned by Instant-NGP.<br>
+  </p>
+
+  <div class="row">
+    <div class="col-gallery">
+      <video  width="100%" loop autoplay muted>
+        <source src="results/main_results/nerf_tm.mp4" type="video/mp4">
+      </video>
+      <p class="text-center">Tone-mapped Views (NeRF)</p>
+    </div>
+    <div class="col-gallery">
+      <video  width="100%" loop autoplay muted>
+        <source src="results/main_results/nerf_exp.mp4" type="video/mp4">
+      </video>
+      <p class="text-center">Exposure Maps (NeRF)</p>
+    </div>
+    <div class="col-gallery">
+      <video  width="100%" loop autoplay muted>
+        <source src="results/main_results/ngp_tm.mp4" type="video/mp4">
+      </video>
+      <p class="text-center" style="font-size: 0.95em">Tone-mapped Views (Instant-NGP)</p>
+    </div>
+    <div class="col-gallery">
+      <video  width="100%" loop autoplay muted>
+        <source src="results/main_results/ngp_exp.mp4" type="video/mp4">
+      </video>
+      <p class="text-center">Exposure Maps (Instant-NGP)</p>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+</body>
+
+<script>
+var videos = document.getElementsByClassName("clickplay");
+for (var i = 0; i < videos.length; i++) {
+  videos[i].addEventListener("click", function() {
+    this.play();
+  });
+  videos[i].addEventListener("ended", function() {
+    this.pause();
+    this.currentTime = 0;
+  });
+}
+
+document.querySelectorAll('.info-container').forEach(function(container) {
+  container.addEventListener('mouseover', function() {
+    var infoText = container.querySelector('.info-text');
+    infoText.style.display = 'block';
+  });
+
+  container.addEventListener('mouseout', function() {
+    var infoText = container.querySelector('.info-text');
+    infoText.style.display = 'none';
+  });
+});
+</script>
+
+</html>
