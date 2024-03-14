@@ -23,7 +23,7 @@
 
 <body>
 <div class="content">
-  <h1><strong>LTM-NeRF: 3D Local Tone Mapping Embedded HDR Neural Radiance Field</strong></h1>
+  <h1><strong>LTM-NeRF: Embedding 3D Local Tone Mapping in HDR Neural Radiance Field</strong></h1>
   <p id="authors" class="serif">
     <p id="authors"><a href="https://xhuangcv.github.io/">Xin Huang<sup>1</sup></a> <a href="https://qzhang-cv.github.io/">Qi Zhang<sup>1</sup></a>  <a href="https://scholar.google.com/citations?user=PhkrqioAAAAJ&hl=en">Ying Feng<sup>1</sup></a> </p>
     <p id="authors"><a href="http://users.cecs.anu.edu.au/~hongdong/">Hongdong Li<sup>2</sup></a> <a href="https://teacher.nwpu.edu.cn/qwang.html ">Qing Wang<sup>1</sup></a> <br>
@@ -56,7 +56,7 @@
 <div class="content">
   <p style="text-align:center; font-size: 2em;" class="serif">Abstract</p>
   <p>
-    Recent advances in Neural Radiance Fields (NeRF) have provided a new geometric primitive for novel view synthesis. High Dynamic Range NeRF (HDR NeRF) can render novel views with a higher dynamic range. However, effectively displaying the scene contents of HDR NeRF on diverse devices with limited dynamic range poses a significant challenge. To address this, we present 3D local tone mapping embedded HDR neural radiance field (aka LTM-NeRF), a method designed to recover HDR NeRF and support 3D local tone mapping. Our LTM-NeRF contains a Camera Response Function (CRF) module and a Neural Exposure Field (NeEF), working in cooperation with a NeRF-based framework. LTM-NeRF allows for the synthesis of HDR views, tone-mapped views, and LDR views under different exposure settings, using only the multi-view multi-exposure LDR inputs for supervision. Specifically, we propose a differentiable CRF module for HDR NeRF reconstruction, globally mapping the scene's HDR radiance to an LDR pixel value captured by the camera sensor. Moreover, we introduce a neural exposure field to approximate the scene appearance in an HDR NeRF with limited dynamic range locally, for compatibility with various displays. To evaluate our method, we present a forward-facing dataset including multiple-view multi-exposure images and multi-view HDR images. Experimental results on this dataset validate that our method can not only synthesize HDR views and exposure-varying LDR views accurately but also render locally tone-mapped views naturally.
+    Recent advances in Neural Radiance Fields (NeRF) have provided a new geometric primitive for novel view synthesis. High Dynamic Range NeRF (HDR NeRF) can render novel views with a higher dynamic range. However, effectively displaying the scene contents of HDR NeRF on diverse devices with limited dynamic range poses a significant challenge. To address this, we present LTM-NeRF, a method designed to recover HDR NeRF and support 3D local tone mapping. LTM-NeRF allows for the synthesis of HDR views, tone-mapped views, and LDR views under different exposure settings, using only the multi-view multi-exposure LDR inputs for supervision. Specifically, we propose a differentiable Camera Response Function (CRF) module for HDR NeRF reconstruction, globally mapping the scene's HDR radiance to LDR pixels. Moreover, we introduce a Neural Exposure Field (NeEF) to represent the spatially varying exposure time of an HDR NeRF to achieve 3D local tone mapping, for compatibility with various displays. Comprehensive experiments demonstrate that our method can not only synthesize HDR views and exposure-varying LDR views accurately but also render locally tone-mapped views naturally.
   </p>
 </div>
 
