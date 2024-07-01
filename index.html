@@ -166,9 +166,8 @@
   </div>
 
   <p style="font-size: 1.2em" class="serif">
-    To enhance the view consistency, a potential method is to train a NeRF from the images tone-mapped with 2D methods and then render views.
-    NeRF may smooth the inconsistency of training views, but it cannot solve the view inconsistency issue completely.
-    Because the flicker artifacts among the training views may be interpreted as view-dependent color.
+    To enhance the view consistency, a potential strategy is to train a NeRF from the images tone-mapped with 2D methods and then render views.
+    However, this strategy also exhibits undesirable luminance changes. The flicker artifacts among the training views are reconstructed because they are interpreted as the view-dependent color by NeRF, though the small flickers are smoothed due to the high-frequency information being difficult for NeRF to overfit.
   <div class="row">
     <div class="col-full">
       <video  width="100%" loop controls>
