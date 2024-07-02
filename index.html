@@ -137,7 +137,7 @@
 
 <!-- comparisons -->
 <div class="content">
-  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Comparisons on LDR/HDR Views</p>
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Comparisons for LDR/HDR View Synthesis</p>
   <p style="font-size: 1.2em" class="serif">
     LTM-NeRF outperforms both NeRF and NeRF-W on novel LDR Views rendering. When compared with NeRF-GT (the upper bound of our method) 
     for novel LDR and HDR view rendering, our method achieves similar performance. 
@@ -153,7 +153,7 @@
 
 
 <div class="content">
-  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Comparisons on Locally Tone-mapped Views</p>
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Comparisons for Locally Tone-mapped View Synthesis</p>
   <p style="font-size: 1.2em" class="serif">
     Compared with post-processing methods that render HDR video from HDR NeRF and then tone map it with 2D image and video methods, LTM-NeRF produces tone-mapped views with more vivid color and improved contrast. Most importantly, our 3D tone mapping method inherently preserves the view consistency.
   </p>
@@ -206,6 +206,23 @@
     <div class="col-full">
       <video  width="100%" loop controls>
         <source src="results/comparisons/exposure_fusion.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Comparisons with RawNeRF for Tone-mapped View Synthesis</p>
+  <p style="font-size: 1.2em" class="serif">
+    RawNeRF is trained from multi-view HDR images without noise, since it is unable to take multi-exposure multi-view LDR images as input.
+    The rendered HDR views are tone-mapped using RawNeRF's tone mapping operation that employs a single gamma curve for the entire view.
+    As shown in the video, RawNeRF's global tone mapping results in a loss of local contrast, though it preserves view consistency.
+  </p>
+  <div class="row">
+    <div class="col-full">
+      <video  width="100%" loop controls>
+        <source src="results/comparisons/nerfinthedark.mp4" type="video/mp4">
       </video>
     </div>
   </div>
